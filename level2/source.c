@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 void main(void) {
-	uint addr;
+	unsigned int addr;
 	char input[76];
 
 	fflush(stdout);
