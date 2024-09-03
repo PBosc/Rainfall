@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// TODO Finir
 void n(void) {
 	system("/bin/cat /home/user/level7/.pass");
 	return;
