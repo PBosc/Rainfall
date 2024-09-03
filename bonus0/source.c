@@ -1,42 +1,52 @@
-void p(char* param_1, char* _) {
-	char* end;
-	char local_100c[4104];
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 
-	puts(_);
-	read(0, local_100c, 4096);
-	end = strchr(local_100c, '\n');
-	*end = '\0';
-	strncpy(param_1, local_100c, 20);
-	return;
+void get_input(char* dst, char* prompt) {
+	char* nl_idx;
+	char input[4104];
+
+	puts(prompt);
+
+	read(0, input, 4096);
+
+	nl_idx = strchr(input, '\n');
+	*nl_idx = '\0';
+
+	strncpy(dst, input, 20);
 }
 
-void pp(char* param_1) {
+void combine_inputs(char* dst) {
 	char cur;
-	unsigned uVar2;
-	char* str;
-	char local_34[20];
-	char local_20[20];
+	unsigned remaining_length;
+	char* tmp;
+	char first_input[20];
+	char second_input[20];
 
-	p(local_34, "-");
-	p(local_20, "-");
-	strcpy(param_1, local_34);
-	uVar2 = 0xffffffff;
-	str = param_1;
+	get_input(first_input, "-");
+	get_input(second_input, "-");
+
+	strcpy(dst, first_input);
+
+	remaining_length = 0xffffffff;
+	tmp = dst;
 	do {
-		if (uVar2 == 0) break;
-		uVar2 = uVar2 - 1;
-		cur = *str;
-		str++;
+		if (remaining_length == 0) break;
+		remaining_length -= 1;
+		cur = *tmp;
+		tmp++;
 	} while (cur != '\0');
-	*(undefined2*)(param_1 + (~uVar2 - 1)) = ' ';
-	strcat(param_1, local_20);
-	return;
+
+	*(dst - remaining_length - 2) = ' ';
+
+	strcat(dst, second_input);
 }
 
 int main(void) {
-	char local_3a[54];
+	char output[54];
 
-	pp(local_3a);
-	puts(local_3a);
+	combine_inputs(output);
+	puts(output);
+
 	return 0;
 }
