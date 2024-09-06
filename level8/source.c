@@ -13,7 +13,7 @@ int main(void) {
 	char service_input[125];
 
 	while (1) {
-		printf("%p, %p\n", auth, service);
+		printf("%p, %p, %d\n", auth, service, auth ? auth[33] : 0);
 
 		if (fgets(input, sizeof(input), stdin) == NULL) {
 			return 0;
@@ -22,8 +22,8 @@ int main(void) {
 		if (strncmp(input, "auth ", 5) == 0) {
 			auth = (char*)malloc(4);
 			*auth = 0;
-			if (strlen(auth_input) < 0x1f) {
-				strcpy(auth, auth_input);
+			if (strlen(auth + 6) < 0x1f) {
+				strcpy(auth, input + 6);
 			}
 		}
 
@@ -32,11 +32,11 @@ int main(void) {
 		}
 
 		if (strncmp(input, "service", 7) == 0) {
-			service = strdup(service_input);
+			service = strdup(input + 7);
 		}
 
 		if (strncmp(input, "login", 5) == 0) {
-			if (auth != NULL && auth[8] == 0) {
+			if (auth[32] == 0) {
 				fwrite("Password:\n", 1, 10, stdout);
 			} else {
 				system("/bin/sh");
