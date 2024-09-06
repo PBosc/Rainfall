@@ -13,7 +13,7 @@ int main(void) {
 	char service_input[125];
 
 	while (1) {
-		printf("%p, %p, %d\n", auth, service, auth ? auth[33] : 0);
+		printf("%p, %p\n", auth, service);
 
 		if (fgets(input, sizeof(input), stdin) == NULL) {
 			return 0;

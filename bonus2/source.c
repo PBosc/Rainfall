@@ -3,6 +3,8 @@
 #include <string.h>
 
 int language = 0;
+char *name;
+
 
 void greetuser(void) {
 	char greeting[100];
@@ -14,7 +16,7 @@ void greetuser(void) {
 	} else {
 		strcpy(greeting, "Hello");
 	}
-	strcat(greeting, &g_ADDR);
+	strcat(greeting, &name);
 	puts(greeting);
 	return;
 }
@@ -44,7 +46,7 @@ int main(int argc, char** argv) {
 			}
 		}
 		tmp = a;
-		tmp2 = (char*)&g_ADDR;
+		tmp2 = (char*)&name;
 		for (int i = 0; i < 19; i++) {
 			*tmp2 = *tmp;
 			tmp++;
