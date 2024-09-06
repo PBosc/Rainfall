@@ -5,8 +5,6 @@
 char* service = NULL;
 char* auth = NULL;
 
-// TODO Refaire le source code
-
 int main(void) {
 	char input[128];
 	char auth_input[2];
